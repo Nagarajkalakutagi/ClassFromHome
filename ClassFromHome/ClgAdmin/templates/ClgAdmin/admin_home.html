@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <title>Admin Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <title>Admin Home</title>
+  <link rel="icon" href="{% static 'images/CFH04.png' %}">
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/business-frontpage.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+  <style>
+  .table-fixed tbody {
+    height: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.table-fixed thead,
+.table-fixed tbody,
+.table-fixed tr,
+.table-fixed td,
+.table-fixed th {
+    display: block;
+
+}
+.nav-link{
+  color:rgb(94,190,230);
+}
+.nav-link:hover{
+color:rgb(250, 203, 73);
+}
+
+.table-fixed tbody td,
+.table-fixed tbody th,
+.table-fixed thead > tr > th {
+    float: left;
+    position: relative;
+
+    &::after {
+        content: '';
+        clear: both;
+        display: block;
+    }
+}
+  </style>
+
+    <style>
+	.alert,alert-success {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  z-index: 100;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+</style>
+  <script>
+    getfaculty=function(fac_id,admin_id){
+console.log("Faculty data");
+$.ajax({
+type:'GET',
+dataType:'html',
+url:'get-fac-own',
+data:{
+fac_id:fac_id,
+admin_id,admin_id
+},
+success:function(data){
+console.log(data);
+$('#fac_own_form').html(data);
+}
+});
+}
+
+getdeletefaculty=function(fac_id,admin_id){
+console.log("facutly delete");
+var status=confirm("Do you want to delete history of the faculty..?");
+  console.log(status);
+  if (status==true){
+  $.ajax({
+type:'GET',
+data:{fac_id:fac_id,admid_id:admin_id},
+url:'get-del-fac-own',
+success:function(data){
+$("#notify").html(data);
+location.reload();
+
+}
+
+});
+}
+
+}
+
+
+  </script>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg   fixed-top" style="background: rgb(9,85,119); ">
+    <div class="container">
+        <img src="{% static 'images/CFH03.png' %}" style="width:60px;height:inherit;">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active dropdown" >
+            <a aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle " style="color:rgb(250, 203, 73);"  href="#" class="dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink"> <i class="fas fa-user-shield mr-1"></i>{{admin_data.0.0}}</a>
+            <div class="dropdown-menu dropdown-primary p-1  " aria-labelledby="navbarDropdownMenuLink">
+              <p style="color:rgb(68, 67, 67); font-size:12px;">Gmail</p>
+              <p style="font-size: 14px; color:rgb(9,85,119);">{{admin_data.0.2}}</p>
+              <p style="color:rgb(68, 67, 67); font-size:12px;">Phone</p>
+              <p style="font-size: 14px; color:rgb(9,85,119);">{{admin_data.0.4}}</p>
+              <a class="dropdown-item" href="{% url 'admin-logout' %}"><i class="fas fa-sign-out-alt mr-1"></i>Logout</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="py-5 mb-5" style="background: rgb(94,190,230);">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center">
+        <div class="col-lg-12">
+          <h1 class="display-4 text-white mt-5 mb-2" style="text-transform:capitalize;">{{admin_data.0.2}}</h1>
+          <p class="lead mb-5 text-white-50">The principle which manages the faculty and student details </p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    {% if messages %}
+{% for msg in messages %}
+  {% if 'fac_error' in msg.tags %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  <strong><i class="fas fa-exclamation-circle">{{msg}}</i></strong>
+</div>
+  {% elif 'fac_up' in msg.tags %}
+  <div class="alert-success">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  <strong><i class="fas fa-exclamation-circle">{{msg}}</i></strong>
+</div>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+  <!-- Page Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mb-5">
+        <h4 class="mt-5 d-flex justify-content-between">Faculty Details <Button data-toggle="modal" data-target="#exampleModal" class="btn" style="background: rgb(9,85,119); color:white;"><i class="fas fa-plus mr-1"></i>Add Facutly excel sheet</Button>
+        <Button data-toggle="modal" data-target="#extrafaculty" class="btn" style="background: rgb(9,85,119); color:white;"><i class="fas fa-plus mr-1"></i>Add Facutly</Button>
+        <p class="text-success" id="notify"></p>
+        </h4>
+          <div class="table-responsive">
+              <table class="table table-fixed">
+                  <thead>
+                      <tr>
+                          <th scope="col" class="col-3">Fullname</th>
+                          <th scope="col" class="col-3">GMAIL</th>
+                          <th scope="col" class="col-3">Phone</th>
+                          <th scope="col" class="col-3">Edit</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  {% for da in fac_own %}
+                      <tr>
+                          <th scope="row" class="col-3">{{da.fac_firstname}}{{da.fac_lastname}}</th>
+                          <td class="col-3">{{da.fac_gmail}}</td>
+                          <td class="col-3">{{da.fac_phone}}</td>
+                          <td class="col-3">
+                            <button class="btn " data-toggle="modal" data-target="#FacultyModal"style="background: rgb(94,190,230);color:white;" onclick="getfaculty({{da.id}},'{{da.admin_id}}')"><i class="fas fa-pencil-alt mr-1"></i></button>
+                            <button class="btn btn-danger"  style="color:white;"  onclick="getdeletefaculty({{da.id}},'{{da.admin_id}}')"><i class="fas fa-trash-alt mr-1"></i></button>
+                          </td>
+                      </tr>
+                  {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+    </div>
+    <!-- /.row -->
+    <h4>Courses You Selected</h4>
+    <!--Add course form-->
+    <div class="row">
+      <form action="{% url 'admin_addcourse' %}" enctype="multipart/form-data" class="form-inline" method="POST">
+        {% csrf_token %}
+        <div class="form-group mx-sm-3  mb-2">
+          {{courseform.course}}
+        </div>
+        <div class="form-group mx-sm-3 mb-2">
+          {{courseform.semester}}
+        </div>
+        <div class="form-group mx-sm-3 mb-2">
+          <div class="input-group">
+
+            <div class="custom-file">
+              <label id="stud_file_id" class="custom-file-label" for="id_stud_file_id">Student File</label>
+              {{courseform.stud_file}}
+            </div>
+
+          </div>
+
+        </div>
+
+        <button type="submit" class="btn  mb-2" style="background: rgb(94,190,230);color:white;">Submit</button>
+      </form>
+    {% if messages %}
+      {% for msg in messages %}
+      {% if 'pandaserror' in msg.tags %}
+      <h5 class="text-danger">{{msg}}</h5>
+      {% elif 'course-add' in msg.tags %}
+      <h5 class="text-danger">{{msg}}</h5>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+    </div>
+<!--End row-->
+
+
+    <div class="row">
+      {% if cur.0.1 not in course_data.0 %}
+        {% for course in course_data %}
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="container-fluid d-flex justify-content-center " style="width:interit; height:200px; background: rgb(9,85,119); ">
+            <h1 style="align-self:center; text-transform:uppercase; font-size:60px; color:rgb(250, 203, 73); text-shadow: 5px 5px 10px black;">{{course.3}}</h1>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">Semester:{{course.2}}</h4>
+            <p class="card-text">Students:{{course.0}}</p>
+            <p class="card-text">Teachers-3</p>
+          </div>
+          <div class="card-footer">
+            <a href="ad-st-dashboard/{{course.1}}" class="btn" style="background:rgb(94,190,230); color:rgb(9,85,119);">Find Out More!</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <div class="col-md-4 mb-5">
+        <h5 class="text-center " style="background:#0000">Course is not selected</h5>
+      </div>
+      {% endif%}
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+  <!-- Footer -->
+  <footer class="py-5" style="background:rgb(9,85,119) ;">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+<!--Add Faculty Modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form class="modal-content"action="{% url 'fac_upload' %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Faculty Details In Excel Sheet</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          <div class="form-group mx-sm-3 mb-2">
+            <div class="input-group">
+
+              <div class="custom-file">
+                <input type="file" accept=".xlsx" name="fac_file" class="custom-file-input" id="inputGroupFile01"
+                  aria-describedby="inputGroupFileAddon01" >
+                <label class="custom-file-label" for="inputGroupFile01">Faculty Information File</label>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-primary"></input>
+      </div>
+    </form>
+    </div>
+  </div>
+
+
+<div class="modal fade" id="FacultyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form class="modal-content"action="{% url 'fac_update_own' %}" method="POST" >
+      {% csrf_token %}
+      <div class="modal-header">
+        <h5 class="modal-title" id="FacultyModalLabel">Edit Faculty Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          <div class="form-group mx-sm-3 mb-2" id="fac_own_form">
+
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-primary"></input>
+      </div>
+    </form>
+    </div>
+  </div>
+
+
+<div class="modal fade" id="extrafaculty" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form class="modal-content"action="{% url 'extra_fac' %}" method="POST" >
+      {% csrf_token %}
+      <div class="modal-header">
+        <h5 class="modal-title" id="facultylabel">Add Faculty Manually</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          <div class="form-group mx-sm-3 mb-2">
+            <div class="input-group mt-3">
+              {{extra_fac.fac_firstname}}
+            </div>
+            <div class="input-group mt-3">
+              {{extra_fac.fac_lastname}}
+            </div>
+            <div class="input-group mt-3">
+              {{extra_fac.fac_gmail}}
+            </div>
+            <div class="input-group mt-3">
+              {{extra_fac.fac_phone}}
+            </div>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-primary"></input>
+      </div>
+    </form>
+    </div>
+  </div>
+
+</div>
+<!--End modal-->
+
+</html>

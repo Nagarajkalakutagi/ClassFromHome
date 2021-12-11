@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+      <link href="{% static 'css/adminreg.css'%}" rel="stylesheet" type="text/css">
+    <script src="{% static 'js/jquery.js' %}"></script>
+<style>
+    body{
+    background-image:url("{% static 'images/bg4.jpg' %}");
+    }
+    .inline{
+    display:flex;
+    }
+</style>
+  </head>
+  <body>
+  {% block regcontent %}
+
+  {% endblock %}
+</body>
+</html>

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Student Home</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="icon" href="{% static 'images/CFH04.png' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+crossorigin="anonymous">
+
+<script>
+  function openCity(evt, cityName) {
+    var i, tabcontent1, tablinks;
+    tabcontent1 = document.getElementsByClassName("tabcontent1");
+    for (i = 0; i < tabcontent1.length; i++) {
+      tabcontent1[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+  
+
+  </script>
+
+<style>
+* {box-sizing: border-box}
+
+/* Set height of body and the document to 100% */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial;
+}
+
+/* Style tab links */
+.tablink { 
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background-color: rgb(92, 222, 255);
+  color: rgb(255, 1, 99);
+  float: left;
+  border-radius: 3px;
+  border-color: orangered;
+  border: none;
+  outline: none;
+  cursor: pointer;
+ 
+  font-size: 25px;
+  width: 33.33%;
+}
+
+.tablink:hover {
+  background-color: rgb(111, 101, 245);
+  color: rgb(19, 0, 34);
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+  color: rgb(38, 34, 238);
+  display: none;
+  padding: 100px 20px;
+  height: 100%;
+}
+
+#Home {background-color:white;}
+#News {background-color:white;}
+/*  New Code For 3rd Tab start here */
+#Assignments {background-color:white;}
+.assignment:hover
+{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background-color: rgb(92, 222, 255);
+  color: rgb(255, 1, 99);
+  float: left;
+  border-radius: 3px;
+  border-color: orangered;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 25px;
+  width: 33.3%;
+}
+.tabcontent3 {
+  height: 120%;
+  padding: 6px 12px;
+  border-top: none;
+  border-radius: 2px;
+}
+
+.tab3 {
+  width: 100%;
+  border-radius:0px;
+  overflow: hidden;
+  border: none;
+  border-color: whitesmoke;
+  background-color: rgb(92, 222, 255);
+}
+
+/* Style the buttons inside the tab */
+.tab3 button {
+  background-color: inherit;
+  float: left;
+  border-color: rgb(116, 181, 255);
+  cursor: pointer;
+  border: none;
+  border-radius: 1px;
+  transition: 0.3s;
+  font-family: sans-serif;
+  font-size: larger;
+}
+
+/* Change background color of buttons on hover */
+.tab3 button:hover {
+  background-color: rgb(61, 111, 248);
+  color: white;
+}
+
+/* Create an active/current tablink class */
+.tab3 button.active {
+  background-color: rgb(255, 255, 255);
+  color: rgb(44, 1, 17);
+}
+
+/* Style the tab content */
+.tabcontent3 {
+  display: none;
+  padding: 6px 12px;
+  -webkit-animation: fadeEffect 1s;
+  animation: fadeEffect 1s;
+}
+
+/* Fade in tabs */
+@-webkit-keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+/*  New Code For 3rd Tab Ends Here*/
+
+
+.tab {
+  width: 100%;
+  border-radius:0px;
+  overflow: hidden;
+  border: none;
+  border-color: whitesmoke;
+  background-color: rgb(92, 222, 255);
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border-color: rgb(116, 181, 255);
+  cursor: pointer;
+  border: none;
+  border-radius: 1px;
+  transition: 0.3s;
+  font-family: sans-serif;
+  font-size: larger;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: rgb(61, 111, 248);
+  color: white;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: rgb(255, 255, 255);
+  color: rgb(44, 1, 17);
+}
+
+/* Style the tab content */
+.tabcontent1 {
+  height: 120%;
+  display: none;
+  padding: 6px 12px;
+  border-top: none;
+  border-radius: 2px;
+}
+.tablinks
+{
+  width: 20%;
+  border-radius: 8px;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Merriweather);
+
+.studentbox {
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  display: block;
+  width: 100%;
+  height: 80px;
+  align-self: center;
+  margin: -1px 0 0 -1px;
+  color: rgb(67, 1, 121);
+  background: linear-gradient(
+     white, white 5%,white, rgb(36, 236, 210)
+  );
+  background-size: 100% 202%;
+  transition: all 0.2s ease;
+  animation: down-bump 0.4s ease;
+}
+
+.studentbox h2 {
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  line-height: 0.1;
+}
+.studentbox h3 {
+  font: 0.8em "Lucida Grande", serif;
+}
+
+.studentbox:hover {
+  background-position: 100% 100%;
+  animation: up-bump 0.4s ease;
+}
+.studentbox:hover h2 {
+  color: #0011ff;
+}
+.studentbox:hover h2 span {
+  color: rgb(0, 26, 255);
+}
+.studentbox:hover h3 {
+  color: rgb(25, 0, 255);
+}
+
+@keyframes up-bump {
+  0% { padding-top: 0.25; }
+  20% { padding-top: 1.5em; }
+  100% { padding-top: 1em; }
+}
+@keyframes down-bump {
+  0% { padding-top: 0.25em; }
+  20% { padding-top: 0.5em; }
+  100% { padding-top: 1em; }
+}
+
+</style>
+</head>
+<body>
+
+      <div style="background-color: rgb(29, 149, 253);">
+        <h1 style=" height:40px;text-align: center;padding-top: 10px;color: rgb(1, 1, 44);">Student Dashboard</h1>
+        <div onClick="" class="w3-bar w3-black w3-card" align="right">
+          <button class="btn btn-success btn-rounded" style="margin-bottom:5px;font-size: x-small;margin-right:10px;tab-size: 5px;background: none;border:2px;">logout</button>
+        </div>
+          <a href="#" class="studentbox" align="center">
+            <h2>Student Name </h2>
+            <h3>Sem Name</h3>
+          </a>  
+      </div>
+      
+
+    <button id="home"  class="tablink" onclick="openPage('Home', this, 'white')"  >Videos</button>
+    <button id="notes" class="tablink" onclick="openPage('News', this, 'white')"  >Notes</button>
+    <button id="assignment" class="tablink" onclick="openPage('Assignments', this, 'white')" >Assignments</button>
+
+<div id="Home" class="tabcontent">
+        <div class="content-desktop" style="width:100%; background:rgb(255, 255, 255); height:inherit;overflow:auto; margin-top:30px;padding:5px; ">
+                <div class="container">
+                    {% for vid in stud_video %}
+                    <div class="w3-cell-row bg-success" style="margin-top:30px; -webkit-box-shadow: 0px 76px 76px -29px rgba(128,123,128,0.99); -moz-box-shadow: 0px 76px 76px -29px rgba(128,123,128,0.99); box-shadow: 0px 76px 76px -29px rgba(128,123,128,0.99); ">
+                          <div class="content-mobile" style="width:400px; height:200px;">
+                              <video  controls  loop  style="width:inherit; height:inherit;">
+                                <source src="/media/{{vid.2}}" type=video/mp4>
+                            </video>
+                          </div>
+
+                          <div class="w3-cell w3-cell-row  container" >
+                                <div class=" ">
+                                  <h4>{{vid.3}}</h4>
+                                  <p><i class="fas fa-clock" style="margin-right:6px"></i>{{vid.4}}</p>
+                                  <p>Teacher :{{vid.6}}</p>
+                                </div>
+                          </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+</div>
+
+</div>
+<div id="News" class="tabcontent">
+<div class="video-present" style="width:100%; background:rgb(255, 255, 255); height:inherit;overflow:auto; margin-top:30px;padding:10px;">
+                 {% for nt in stud_notes %}
+                  <div class="vid-container" style=" display:flex; width:80%; margin:15px auto;-webkit-box-shadow: 0px 76px 76px -29px rgba(128,123,128,0.99);
+                  -moz-box-shadow: 0px 76px 76px -29px rgba(128,123,128,0.99);
+                  box-shadow: 0px 76px 76px -29px rgba(128,123,128,0.99);" >
+
+                      <div class="video" style="background:rgb(195, 195, 191); width:40%; height:180px;">
+                          <img src="{% static 'images/book.png' %}" style="width:50%; height:inherit">
+                      </div>
+
+                      <div class="video" style="background:rgb(217, 224, 224); width:100%; height:180px;">
+                          <div class="vid-title" style="width:inherit;height:auto; text-align:left;text-align: justify; padding:10px; color:rgb(44, 43, 43)">
+                            <p style="font-size:30px; width:inherit;">{{nt.2}}</p>
+                            <p><i class="fas fa-clock" style="margin-right:6px"></i>{{nt.3}}</p>
+                              <div style="display:flex; width:100%;">
+                                  <div><p>Subject:{{nt.4}}</p>
+                                  <p>Teacher:{{nt.5}}</p>
+                                  </div>
+                              <a href="/media/{{nt.1}}" download style="margin:30px auto; background:red;padding:5px; width:200px; text-align:center; text-decoration:none; color:white;"><i class="fas fa-arrow-down" style="margin-right:5px"></i>Download</a>
+                              </div>
+
+                          </div>
+                      </div>
+                  </div>
+                 {% endfor %}
+              </div>
+    </div>
+      </div>
+
+ <!--/*  New Code For 3rd Tab start here*/-->
+        
+ <div id="Assignments" class="tabcontent" align="center">
+
+  <div class="tab3">
+    <button class="tablinks3" onclick="OpenCity(event, 'Uploaded')" style="width: 50%;">Assignament</button>
+    <button class="tablinks3" onclick="OpenCity(event, 'Recieved')" style="width: 50%;">Submit Assignament</button>
+  </div>
+  
+    <div id="Uploaded" class="tabcontent3">
+      <h3>Uploaded Assignments</h3>
+
+      <div class="container1">
+        <!-- Button to Open the Modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Upload Assignment</button>
+        <!-- The Modal -->
+        <div class="modal" id="myModal2">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Select Semester and Subject To Upload Notes</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div> 
+              <!-- Modal body -->
+              <div class="modal-body">
+                
+                  <label for="first">Enter .....</label>
+                  <input type="text" class="form-control" name="" value="" placeholder="Enter .....">
+
+                  <label for="first">select Subject</label>
+                  <select class="form-control" placeholder="" id="first">
+                    <option value="books">Sub 1</option>
+                    <option value="html">Sub 2</option>
+                    <option value="css">Sub 3</option>
+                    <option value="php">Sub 4</option>
+                    <option value="js">Sub 5</option>
+                  </select>
+
+                  <label for="first">Upload Assignment Quetions</label>
+                  <input type="file" class="form-control" id="file">
+
+              </div>
+              <!-- Modal footer -->
+              <input type="submit" class="btn btn-success" name="submit" value="Submit">
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              </div>
+              
+            </div>
+          </div>
+        </div>  
+      </div>
+        
+                  <div class="pre-scrollable" style="height: 120%; margin-top: 5%;">
+                    <div  class="container" style="display: flex;padding: 15px;">
+                    <img src="https://www.yourguitarsage.com/wp-content/uploads/2012/01/pdf-image.png">
+
+                    <div style="width: 100%;height: auto;background-color: rgb(255, 255, 255);">
+                      <div  align="left" style="padding-left: 5%;background-color: rgb(225, 236, 234);height: auto;">
+                        <h2>Assignment Title</h2>
+                        <time style="font-size:auto"><i class="fa fa-clock" style="padding-right: 2%;"></i>Uploaded Time</time><br>
+                        <Semester style="font-size: auto;">Semester Name</Semester><br>
+                        <sub style="font-size: auto;">Subject Name</sub>
+                      </div>
+                    </div>
+                  </div>
+          </div>
+
+        </div>
+        
+        <div id="Recieved" class="tabcontent3">
+          <h3>Display Recieved Assignments Here..</h3>
+          <p>Assignment Details which students are submitted ass....</p> 
+        </div>
+   </div>           
+
+
+<script>
+    function OpenCity(evt, cityName) {
+      var i, tabcontent3, tablinks3;
+      tabcontent3 = document.getElementsByClassName("tabcontent3");
+      for (i = 0; i < tabcontent3.length; i++) {
+        tabcontent3[i].style.display = "none";
+      }
+      tablinks3 = document.getElementsByClassName("tablinks3");
+      for (i = 0; i < tablinks3.length; i++) {
+        tablinks3[i].className = tablinks3[i].className.replace(" active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+    </script>
+<!--/*  New Code For 3rd Tab  ends here*/-->  
+
+        
+
+
+<script>
+function openPage(pageName,elmnt,color) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+  document.getElementById(pageName).style.display = "block";
+  elmnt.style.backgroundColor = color;
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("notes").click();
+document.getElementById("home").click();
+document.getElementById("subject").click();
+
+
+</script>
+
+                <div class="container">
+                  <form method="POST" id="comment_form">
+                  <div class="form-group">
+                    <input type="text" name="comment_name" id="comment_name" class="form-control" placeholder="Enter Name" />
+                  </div>
+                  <div class="form-group">
+                    <textarea name="comment_content" id="comment_content" class="form-control" placeholder="Enter Comment" rows="5"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <input type="hidden" name="comment_id" id="comment_id" value="0" />
+                    <input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit"  />
+                  </div>
+                  </form>
+                  <span id="comment_message"></span>
+                  <br />
+                  <div id="display_comment"></div>
+                </div>
+
+
+  <script>
+    $(document).ready(function(){
+     
+     $('#comment_form').on('submit', function(event){
+      event.preventDefault();
+      var form_data = $(this).serialize();
+      $.ajax({
+       url:"add_comment.php",
+       method:"POST",
+       data:form_data,
+       dataType:"JSON",
+       success:function(data)
+       {
+        if(data.error != '')
+        {
+         $('#comment_form')[0].reset();
+         $('#comment_message').html(data.error);
+         $('#comment_id').val('0');
+         load_comment();
+        }
+       }
+      })
+     });
+    
+     load_comment();
+    
+     function load_comment()
+     {
+      $.ajax({
+       url:"fetch_comment.php",
+       method:"POST",
+       success:function(data)
+       {
+        $('#display_comment').html(data);
+       }
+      })
+     }
+    
+     $(document).on('click', '.reply', function(){
+      var comment_id = $(this).attr("id");
+      $('#comment_id').val(comment_id);
+      $('#comment_name').focus();
+     });
+     
+    });
+  </script>
+   
+<footer align="center" style="background-color: rgb(161, 249, 252);border: 2px;padding: 2%;">
+  &copy; Copyright 2020 <i class="fa fa-home".com>ClassFromHome.com</i>
+
+</footer>
+</body>
+</html> 

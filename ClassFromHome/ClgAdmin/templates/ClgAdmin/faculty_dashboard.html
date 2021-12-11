@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <title>Faculty Home</title>
+  <!-- Bootstrap core CSS -->
+    <link rel="icon" href="{% static 'images/CFH04.png' %}">
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/business-frontpage.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+  <style>
+  .table-fixed tbody {
+    height: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.table-fixed thead,
+.table-fixed tbody,
+.table-fixed tr,
+.table-fixed td,
+.table-fixed th {
+    display: block;
+
+}
+.nav-link{
+  color:rgb(94,190,230);
+}
+.nav-link:hover{
+color:rgb(250, 203, 73);
+}
+
+.table-fixed tbody td,
+.table-fixed tbody th,
+.table-fixed thead > tr > th {
+    float: left;
+    position: relative;
+
+    &::after {
+        content: '';
+        clear: both;
+        display: block;
+    }
+}
+  </style>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg   fixed-top" style="background: rgb(9,85,119); ">
+    <div class="container">
+        <img src="{% static 'images/CFH03.png' %}" style="width:60px;height:inherit;">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active dropdown" >
+            <a aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle " style="color:rgb(250, 203, 73);"  href="#" class="dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink"> <i class="fas fa-user-shield mr-1"></i>{{fac.fac_firstname}} {{fac.fac_lastname}}</a>
+            <div class="dropdown-menu dropdown-primary p-1  " aria-labelledby="navbarDropdownMenuLink">
+              <p style="color:rgb(68, 67, 67); font-size:12px;">Gmail</p>
+              <p style="font-size: 14px; color:rgb(9,85,119);">{{fac.fac_gmail}}</p>
+              <p style="color:rgb(68, 67, 67); font-size:12px;">Phone</p>
+              <p style="font-size: 14px; color:rgb(9,85,119);">{{fac.fac_phone}}</p>
+              <a class="dropdown-item" href="{% url 'faculty-logout' %}"><i class="fas fa-sign-out-alt mr-1"></i>Logout</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="py-5 mb-5" style="background: rgb(94,190,230);">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center">
+        <div class="col-lg-12">
+          <h1 class="display-4 text-white mt-5 mb-2">Clg Name</h1>
+          <p class="lead mb-5 text-white-50">The teacher who can take class by sending videos and send assignments,notes</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <div class="container">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="videos-tab" data-toggle="tab" href="#videos" role="tab" aria-controls="videos"
+            aria-selected="true"> Videos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes" role="tab" aria-controls="notes"
+            aria-selected="false">Notes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="assignment-tab" data-toggle="tab" href="#assignment" role="tab" aria-controls="assignment"
+              aria-selected="false">Assignment</a>
+          </li>
+      </ul>
+
+      <!--Tab content-->
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="videos" role="tabpanel" aria-labelledby="videos-tab">
+                <div class="container p-3 ">
+                        <div class="row d-flex justify-content-end">
+                                <Button data-toggle="modal" data-target="#exampleModal" class="btn mr-5 text-white" style="background: rgb(9,85,119); color:white;"><i class="fas fa-upload mr-1"></i> Upload Video</Button>
+                        </div>
+                        <div class="row mt-3">
+
+           {% for vid in vid_data %}
+                            <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="container-fluid d-flex justify-content-center " style="width:300px; height:200px; background: rgb(9,85,119); ">
+            <video src="/media/{{vid.2}}" style="width:inherit; height:inherit" controls>
+                                    </video>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">{{vid.3}}</h4>
+            <p><i class="fas fa-clock" style="margin-right:6px"></i>{{vid.4}}</p>
+            <p class="card-text">Teachers-3</p>
+          </div>
+        </div>
+      </div>
+{% endfor %}
+
+                              </div>
+
+                </div>
+        </div>
+        <div class="tab-pane fade" id="notes" role="tabpanel" aria-labelledby="notes-tab">
+                <div class="container p-3 ">
+
+                        <div class="row d-flex justify-content-end">
+                                <Button data-toggle="modal" data-target="#notemodal" class="btn mr-5 text-white" style="background: rgb(9,85,119); color:white;"><i class="fas fa-upload mr-1"></i> Upload notes</Button>
+                        </div>
+                        <div class="row mt-3">
+                            {% for nt in note_data %}
+                                 <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="container-fluid d-flex justify-content-center " style="width:interit; height:200px; background: rgb(9,85,119); ">
+            <img src="{% static 'images/book.png' %}" style="width:interit; height:200px;" controls>
+                                    </img>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">{{nt.3}}</h4>
+            <p><i class="fas fa-clock" style="margin-right:6px"></i>{{vid.4}}</p>
+            <p class="card-text">Teachers-3</p>
+          </div>
+          <div class="card-footer">
+            <a href="/media/{{nt.2}}" class="btn" style="background:rgb(94,190,230); color:rgb(9,85,119);">Find Out More!</a>
+          </div>
+        </div>
+      </div>
+
+
+                     {% endfor %}
+                        </div>
+                    </div>
+          </div>
+
+          <div class="tab-pane fade" id="assignment" role="tabpanel" aria-labelledby="assignment-tab">
+
+                <div class="container p-3 ">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                                    aria-selected="true">Uploaded Assignment</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                                    aria-selected="false">Submited Assignment</a>
+                                </li>
+                              </ul>
+                              <div class="tab-content" id="myTabContent">
+
+                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row d-flex justify-content-end mt-3">
+                                                <Button data-toggle="modal" data-target="#assignmodal" class="btn mr-5 text-white" style="background: rgb(9,85,119); color:white;"><i class="fas fa-upload mr-1"></i> Upload Assingment</Button>
+                                        </div>
+                                        <div class="row mt-3">
+                                            {% for nt in assign_data %}
+                                                <div class="col-md-4 mb-5">
+                                                        <div class="card h-100">
+                                                              <div class="contaitner-fluid d-flex justify-content-center p-3 " style="width:300px; height:200px;">
+                                                                  <img src="{% static 'images/book.png' %}" style="width:150px; height:150px;">
+                                                              </div>
+                                                          <div class="card-body">
+                                                                <h4 class="card-title">{{nt.3}}</h4>
+                                                                <p class="card-text">semester-First Semester</p>
+                                                                <p class="card-text">Subject:{{nt.5}}</p>
+                                                                <p class="card-text"><i class="far fa-clock mr-1">{{nt.4}}</i></p>
+                                                          </div>
+                                                          <div class="card-footer d-flex justify-content-between">
+                                                            <a href="/media/{{nt.2}}" class="btn" style="background:rgb(94,190,230); color:rgb(9,85,119);">View</a>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+
+                                            {% endfor%}
+                                              </div>
+
+
+
+                                </div>
+                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                        <div class="row mt-3">
+
+                                                     {% for nt in submit_data %}
+                                                       <div class="col-md-4 mb-5">
+                                                        <div class="card h-100">
+                                                              <div class="contaitner-fluid d-flex justify-content-center p-3 " style="width:300px; height:200px;">
+                                                                  <img src="{% static 'images/book.png' %}" style="width:150px; height:150px;">
+                                                              </div>
+                                                          <div class="card-body">
+                                                                <h4 class="card-title">{{nt.3}}</h4>
+                                                                <p class="card-text">semester:{{nt.7}}</p>
+                                                              <p> Student {{nt.0}}</p>
+                                                                <p class="card-text">Subject:{{nt.5}}</p>
+                                                                <p class="card-text"><i class="far fa-clock mr-1"></i>{{nt.4}}</p>
+                                                          </div>
+                                                          <div class="card-footer d-flex justify-content-between">
+                                                            <a href="/media/{{nt.2}}" class="btn" style="background:rgb(94,190,230); color:rgb(9,85,119);">View</a>
+                                                              <form method="POST" action="{% url 'accept_status' %}">
+                                                                  {% csrf_token %}
+                                                                  <input type="hidden" name="ac_st_id" value="{{nt.8}}">
+                                                              <button type="submit"  data-toggle="modal" data-target="#Accept" class="btn bg-success" style="color:white;" >Accept</button>
+                                                              </form>
+                                                              <Button data-toggle="modal" data-target="#Reject" class="btn bg-danger" style="color:white;" name="ac_st_id" value="{{nt.8}}"> Reject </Button>
+                                                              <div class="modal fade" id="Reject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Reject</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form action="{% url 'reject_status' %}" method="POST" enctype="multipart/form-data">
+                                  {% csrf_token %}
+                                              <div class="form-group mx-sm-3  mb-2">
+                                                    <input type="text" class="form-control" name="comment" id="staticEmail2" placeholder="Comment">
+                                                    <input type="hidden" name="ac_st_id" value="{{nt.8}}">
+                                              </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                              </form>
+                          </div>
+                        </div>
+                      </div>
+              </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    {% endfor %}
+
+                                              </div>
+
+
+
+
+                                </div>
+
+                              </div>
+
+                    </div>
+
+
+        </div>
+
+      </div>
+      <!--Tab content-->
+
+  </div>
+  <!-- /.container -->
+  <!-- Footer -->
+  <footer class="py-5" style="background:rgb(9,85,119) ;">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+<!--Add Faculty Modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Uplaod Video</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'fac_upload_video' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+                <div class="form-group mx-sm-3 mb-2">
+                <select name="fac_ac_id"  class="form-control" >
+                        <{% for d in fac_activity %}
+                       <option value="{{d.0}}">subject :{{d.2}}{{d.4}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="form-group mx-sm-3  mb-2">
+                            <input type="text" class="form-control" id="staticEmail2" name="fac_video_path" placeholder="Enter Title ">
+                          </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                            <div class="input-group">
+                              <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                  name="fac_video_file" aria-describedby="inputGroupFileAddon01" accept="video/mp4">
+                                <label class="custom-file-label" for="inputGroupFile01">Student File</label>
+                              </div>
+                        </div>
+                    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-primary"></input>
+           </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+      <div class="modal fade" id="notemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Upload Notes</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="{% url 'fac-note-file' %}" method="POST" enctype="multipart/form-data">
+                      {%csrf_token %}
+                        <div class="form-group mx-sm-3 mb-2">
+                                <select class="form-control" name="fac_ac_id">
+                                    {% for d in fac_activity %}
+                                         <option value="{{d.0}}">subject :{{d.2}}{{d.4}}</option>
+                                    {% endfor %}
+                                      </select>
+                                    </div>
+                                    <div class="form-group mx-sm-3  mb-2">
+                                            <input type="text" name="note-title"class="form-control" id="staticEmail2" placeholder="Enter Title " >
+                                          </div>
+
+                                    <div class="form-group mx-sm-3 mb-2">
+                                            <div class="input-group">
+                                              <div class="custom-file">
+                                                <input type="file" accept=".doc,.docx,.pdf" class="custom-file-input" id="inputGroupFile01" name="note-file"
+                                                  aria-describedby="inputGroupFileAddon01"  >
+                                                <label class="custom-file-label" for="inputGroupFile01">Student File</label>
+                                              </div>
+                                        </div>
+                                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                    </form>
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="modal fade" id="assignmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Upload Assignment title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form action="{% url 'assign_upload' %}" method="POST" enctype="multipart/form-data">
+                                  {% csrf_token %}
+                                  <div class="form-group mx-sm-3 mb-2">
+                                          <select class="form-control" name="fac_ac_id">
+                                               {% for d in fac_activity %}
+                                         <option value="{{d.0}}">subject :{{d.2}}{{d.4}}</option>
+                                                 {% endfor %}
+                                              </select>
+                                              </div>
+                                              <div class="form-group mx-sm-3  mb-2">
+                                                    <input type="text" class="form-control" name="asign_title" id="staticEmail2" placeholder="Enter Title ">
+                                                  </div>
+
+                                              <div class="form-group mx-sm-3 mb-2">
+                                                      <div class="input-group">
+                                                        <div class="custom-file">
+                                                          <input type="file" name="asign_file" class="custom-file-input" id="inputGroupFile01" accept=".doc,.docx,.pdf"
+                                                            aria-describedby="inputGroupFileAddon01" >
+                                                          <label class="custom-file-label" for="inputGroupFile01">Student File</label>
+                                                        </div>
+                                                  </div>
+                                              </div>
+
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                              </form>
+                          </div>
+                        </div>
+                      </div>
+              </div>
+<!--End modal-->
+</html>

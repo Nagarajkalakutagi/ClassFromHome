@@ -1,0 +1,93 @@
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Enter OTP</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="{% static 'images/CFH04.png' %}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    
+  <!-- Start your project here-->  
+
+  <!-- End your project here-->
+
+  <!-- jQuery -->
+  <script type="text/javascript" src="{% static 'js2/jquery.min.js' %}"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="{% static 'js2/popper.min.js' %}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{% static 'js2/bootstrap.min.js' %}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{% static 'js2/mdb.min.js' %}"></script>
+  <!-- Your custom scripts (optional) -->
+  <script type="text/javascript"></script>
+    
+  <nav class="mb-1 navbar navbar-expand-lg navbar-dark" style="background: rgb(9,85,119);">
+
+        <img src="{% static 'images/CFH03.png' %}" style="width:60px;height:inherit;">
+      </nav>
+
+      <div class="main mt-3" >
+            <div class="container h-100 " >
+                <!-- Default form register -->
+<form class="text-center border border-light p-5 mt-3"  method="POST" action="{% url 'admin-reg' %}">
+    {% csrf_token %}
+
+        <p class="h4 mb-4">Enter OTP</p>
+    
+        <div class="form-row mb-4">
+
+{% csrf_token %}
+                  <input type="text" class="form-control mb-5"  name="otp" placeholder="Enter OTP">
+
+                     <input type="submit" class="btn btn-block"  value="Submit" formaction="{% url 'otpsubmit' %}">
+              <input type="submit" class="btn btn-block"  value="Resend" formaction="{% url 'resendOtp' %}">
+          </div>
+
+          {% if messages %}
+          {% for msg in messages %}
+          {% if 'otpsubmit' in msg.tags %}
+    <h4 class="text-danger">{{msg}}</h4>
+          {% endif %}
+          {% endfor %}
+          {% endif  %}
+        </div>
+
+    
+
+        
+    
+        <!-- Sign up button -->
+    
+        <!-- Social register -->
+        
+    
+        <hr>
+
+        <!-- Terms of service -->
+        
+    
+    </form>
+    <!-- Default form register -->
+                </div>
+      </div>
+</body>
+</html>

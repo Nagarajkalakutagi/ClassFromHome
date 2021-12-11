@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <title>Business Frontpage - Start Bootstrap Template</title>
+  <!-- Bootstrap core CSS -->
+    <link rel="icon" href="{% static 'images/CFH04.png' %}">
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/business-frontpage.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+  <style>
+  .table-fixed tbody {
+    height: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.table-fixed thead,
+.table-fixed tbody,
+.table-fixed tr,
+.table-fixed td,
+.table-fixed th {
+    display: block;
+
+}
+.nav-link{
+  color:rgb(94,190,230);
+}
+.nav-link:hover{
+color:rgb(250, 203, 73);
+}
+
+.table-fixed tbody td,
+.table-fixed tbody th,
+.table-fixed thead > tr > th {
+    float: left;
+    position: relative;
+
+    &::after {
+        content: '';
+        clear: both;
+        display: block;
+    }
+}
+  </style>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg   fixed-top" style="background: rgb(9,85,119); ">
+    <div class="container">
+        <img src="{% static 'images/CFH03.png' %}" style="width:60px;height:inherit;">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active dropdown" >
+            <a aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle " style="color:rgb(250, 203, 73);"  href="#" class="dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink"> <i class="fas fa-user-shield mr-1"></i>{{stud.0.0}}</a>
+            <div class="dropdown-menu dropdown-primary p-1  " aria-labelledby="navbarDropdownMenuLink">
+              <p style="color:rgb(68, 67, 67); font-size:12px;">Gmail</p>
+              <p style="font-size: 14px; color:rgb(9,85,119);">{{stud.0.2}}</p>
+                 <p style="color:rgb(68, 67, 67); font-size:12px;">Semester</p>
+              <p style="font-size: 14px; color:rgb(9,85,119);">{{stud.0.1}}</p>
+              <p style="color:rgb(68, 67, 67); font-size:12px;">Phone</p>
+              <p style="font-size: 14px; color:rgb(9,85,119);">{{stud.0.3}}</p>
+              <a class="dropdown-item" href="{% url 'studentlogout' %}"><i class="fas fa-sign-out-alt mr-1"></i>Logout</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="py-5 mb-5" style="background: rgb(94,190,230);">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center">
+        <div class="col-lg-12">
+          <h1 class="display-4 text-white mt-5 mb-2">{{clg_name.0.0}}</h1>
+          <p class="lead mb-5 text-white-50">The Student can study  by online videos  and provided notes by the their teacher</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <div class="container">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="videos-tab" data-toggle="tab" href="#videos" role="tab" aria-controls="videos"
+            aria-selected="true"> Videos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes" role="tab" aria-controls="notes"
+            aria-selected="false">Notes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="assignment-tab" data-toggle="tab" href="#assignment" role="tab" aria-controls="assignment"
+              aria-selected="false">Assignment</a>
+          </li>
+      </ul>
+
+      <!--Tab content-->
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="videos" role="tabpanel" aria-labelledby="videos-tab">
+                <div class="container p-3 ">
+                        <div class="row mt-3">
+
+            {% for vid in stud_video %}
+                            <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="container-fluid d-flex justify-content-center " style="width:300px; height:200px; background: rgb(9,85,119); ">
+            <video src="/media/{{vid.2}}" style="width:inherit; height:inherit" controls>
+                                    </video>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">{{vid.3}}</h4>
+            <p><i class="fas fa-clock" style="margin-right:6px"></i>{{vid.4}}</p>
+            <p class="card-text">Teacher :{{vid.6}}</p>
+          </div>
+        </div>
+      </div>
+{% endfor %}
+
+                              </div>
+
+                </div>
+        </div>
+        <div class="tab-pane fade" id="notes" role="tabpanel" aria-labelledby="notes-tab">
+                <div class="container p-3 ">
+                        <div class="row mt-3">
+                            {% for nt in stud_notes %}
+                                 <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="container-fluid d-flex justify-content-center " style="width:interit; height:200px; background: rgb(9,85,119); ">
+            <img src="{% static 'images/book.png' %}" style="width:interit; height:200px;" controls>
+                                    </img>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">{{nt.2}}</h4>
+            <p><i class="fas fa-clock" style="margin-right:6px"></i>{{vid.3}}</p>
+              <p>Subject:{{nt.4}}</p>
+            <p class="card-text">Teachers:{{nt.5}}</p>
+          </div>
+          <div class="card-footer">
+            <a href="/media/{{nt.1}}" class="btn" style="background:rgb(94,190,230); color:rgb(9,85,119);">View</a>
+          </div>
+        </div>
+      </div>{% endfor %}
+                        </div>
+                    </div>
+          </div>
+
+
+
+
+          <div class="tab-pane fade" id="assignment" role="tabpanel" aria-labelledby="assignment-tab">
+
+                <div class="container p-3 ">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                                        <div class="row mt-3">
+                                            {% for nt in assign_notes %}
+                                                <div class="col-md-4 mb-5">
+                                                        <div class="card h-100">
+                                                              <div class="contaitner-fluid d-flex justify-content-center p-3 " style="width:300px; height:200px;">
+                                                                  <img src="{% static 'images/book.png' %}" style="width:150px; height:150px;">
+                                                              </div>
+                                                          <div class="card-body">
+                                                                <h4 class="card-title">{{nt.2}}</h4>
+                                                                <p class="card-text">subject : {{nt.4}}</p>
+                                                                <p class="card-text">Teacher:{{nt.5}}</p>
+                                                                <p class="card-text"><i class="far fa-clock mr-1"></i>{{nt.3}}</p>
+                                                              <a href="/media/{{nt.1}}"><i class="fas fa-arrow-down" style="margin-right:5px"></i>view</a>
+
+                                                          </div>
+
+                                                          <div class="card-footer d-flex justify-content-between">
+                                                              {% if nt.8 == True %}
+                                                                 {% if nt.10 == True %}
+                                                                 <p class="text-success">Your Assignment Accepted successfully<a href="/media/{{nt.9}}">View Assignment</a></p>
+                                                                 {% elif nt.11 == True %}
+                                                                 <p class="text-success">Your Assignment Rejected Resonance :{{nt.12}}<a href="/media/{{nt.9}}">View</a></p>
+                                                                 <button type="button"  data-toggle="modal" data-target="#myModal{{nt.6}}" style="margin:30px auto; background:red;padding:5px; width:200px; text-align:center; text-decoration:none; color:white;">Submit Agen</button>
+                                                                 {% else %}
+                                                                 <p class="text-success">Your Assignment is Waiting state<a href="/media/{{nt.9}}">View Assignment</a></p>
+                                                                 {% endif %}
+                                                              {% else %}
+                                                             <button type="button"  data-toggle="modal" data-target="#myModal{{nt.6}}" style="margin:30px auto; background:red;padding:5px; width:200px; text-align:center; text-decoration:none; color:white;">Submit Notes</button>
+
+                                                              {% endif %}
+                                                              <div class="modal fade" id="myModal{{nt.6}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Upload Assignment title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form action="{% url 'asign_submit' %}" method="POST" enctype="multipart/form-data">
+                                  {% csrf_token %}
+                                <input type="hidden" value="{{nt.6}}" name="as_ac_id">
+
+                                              <div class="form-group mx-sm-3  mb-2">
+                                                    <input type="text" class="form-control"name="note-title" id="staticEmail2" placeholder="Enter Title ">
+                                                  </div>
+
+                                              <div class="form-group mx-sm-3 mb-2">
+                                                      <div class="input-group">
+                                                        <div class="custom-file">
+                                                          <input type="file" name="note_file" class="custom-file-input" id="inputGroupFile01"
+                                                            aria-describedby="inputGroupFileAddon01" >
+                                                          <label class="custom-file-label" for="inputGroupFile01">Student File</label>
+                                                        </div>
+                                                  </div>
+                                              </div>
+
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                              </form>
+                          </div>
+                        </div>
+                      </div>
+              </div>
+<!--End modal-->
+                                                          </div>
+
+                                                        </div>
+                                                      </div>
+
+                                            {% endfor%}
+                                              </div>
+
+
+                    </div>
+
+
+        </div>
+
+      </div>
+      <!--Tab content-->
+
+  </div>
+  <!-- /.container -->
+  <!-- Footer -->
+  <footer class="py-5" style="background:rgb(9,85,119) ;">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+<!--Add Faculty Modal-->
+
+
+
+</html>
